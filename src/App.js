@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useFromStorage, randomTitle } from './lib'
+import SidePanel from './SidePanel'
 
-function App() {
+const App = () => {
+  const [notes, setNotes] = useFromStorage('notes', [])
+
+  function addNewNote() {
+    setNotes([...notes, {
+      id: Date.now(),
+      title: randomTitle(),
+      body: ''
+    }])
+  }
+
+  function editNote(id, newNote) {
+    setNotes(notes.map(note => 
+      note.id === id ? newNote : note))
+  }
+
+  function removeNote(id) {
+    setNotes(notes.filter(note => note.id !== id))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="container">
+      <header>
+        <h1>Notes App!</h1>
       </header>
+
+      <SidePanel 
+        notes={notes}
+        addNote={addNewNote} 
+        editNote={editNote}
+        removeNote={removeNote}
+        clearAll={() => setNotes([])}
+      />
+
+      <textarea></textarea>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

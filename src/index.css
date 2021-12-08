@@ -1,13 +1,85 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+::before, ::after, * {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  overflow-y: hidden;
+  color: grey;
+}
+
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+header {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  
+  padding: 0em 2em;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  position: relative;
+  z-index: 10;
+}
+
+ul {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-right: 2px solid rgb(228, 228, 228);
+}
+
+ul > li {
+  display: flex;
+  padding: 0.5em 1em;
+  transition: 0.3s all 0s;
+  cursor: default;
+}
+
+ul > li:hover {
+  background-color: grey;
+  color: rgb(231, 231, 231);
+}
+
+textarea {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+
+  outline: none;
+  border: none;
+  padding: 2em;
+  caret-color: rgb(80, 80, 80);
+  font-family: inherit;
+  color: rgb(56, 56, 56);
+}
+
+button {
+  padding: 0.25em 2em;
+  width: 100%;
+  border: none;
+}
+
+input {
+  outline: none;
+  background-color: inherit;
+  border: 0;
+  caret-color: rgb(202, 202, 202);
+  color: inherit;
+  cursor: default;
+}
+
+.small-btn {
+  padding: 0.25em 0.1em;
+  margin-left: auto;
 }
