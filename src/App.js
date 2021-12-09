@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useFromStorage, randomTitle } from './lib'
 import SidePanel from './SidePanel'
+import NoteArea from './NoteArea'
 
 const App = () => {
   const [notes, setNotes] = useFromStorage('notes', [])
+  const [currentId, setCurrentId] = useState(-1)
 
   function addNewNote() {
     setNotes([...notes, {
@@ -15,6 +18,11 @@ const App = () => {
   function editNote(id, newNote) {
     setNotes(notes.map(note => 
       note.id === id ? newNote : note))
+  }
+
+  function editBody(id, newBody) {
+    setNotes(notes.map(note => note.id === id 
+      ? {...note, body: newBody} : note))
   }
 
   function removeNote(id) {
@@ -33,9 +41,15 @@ const App = () => {
         editNote={editNote}
         removeNote={removeNote}
         clearAll={() => setNotes([])}
+
+        currentId={currentId}
+        setCurrentId={setCurrentId}
       />
 
-      <textarea></textarea>
+      <NoteArea 
+        notes={notes} 
+        currentId={currentId}
+        editBody={editBody}/>
     </div>
   )
 }

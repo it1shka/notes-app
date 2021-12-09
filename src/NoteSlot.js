@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-const NoteSlot = ({note, editNote, removeNote}) => {
+const NoteSlot = ({note, editNote, removeNote,
+  currentId, setCurrentId}) => {
   const [editing, setEditing] = useState(false)
   const [newTitle, setNewTitle] = useState(note.title)
 
@@ -14,15 +15,20 @@ const NoteSlot = ({note, editNote, removeNote}) => {
     setEditing(!editing)
   }
 
-  function deleteThis() {
+  function deleteThis(e) {
+    e.stopPropagation()
+    if(currentId === note.id)
+      setCurrentId(null)
     removeNote(note.id)
   }
 
   return (
-    <li onContextMenu={toggle}>
+    <li className={currentId === note.id ? "featured" : ""}
+      onContextMenu={toggle} 
+      onClick={() => setCurrentId(note.id)}>
     {editing 
     ? (<>
-      <input
+      <input onClick={e => e.preventDefault()}
         value={newTitle}
         onChange={e => setNewTitle(e.target.value)}
         />

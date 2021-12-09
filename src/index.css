@@ -52,6 +52,11 @@ ul > li:hover {
   color: rgb(231, 231, 231);
 }
 
+ul > li.featured {
+  background-color: grey;
+  color: rgb(231, 231, 231);
+}
+
 textarea {
   grid-column: 2 / 3;
   grid-row: 2 / 3;

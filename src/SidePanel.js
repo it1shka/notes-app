@@ -1,7 +1,7 @@
 import NoteSlot from './NoteSlot'
 
 const SidePanel = ({notes, addNote, 
-  editNote, removeNote, clearAll}) => {
+  editNote, removeNote, clearAll, currentId, setCurrentId}) => {
   return (
     <ul>
       {notes.map(note => <NoteSlot
@@ -9,6 +9,8 @@ const SidePanel = ({notes, addNote,
         note={note}
         editNote={editNote}
         removeNote={removeNote} 
+        currentId={currentId}
+        setCurrentId={setCurrentId}
       />)}
       <button onClick={addNote}>Add New</button>
       <button onClick={clearAll}>Clear All</button>
